@@ -130,6 +130,7 @@ const Header = () => {
             <Link to="/search" className="hover:text-gray-600">Search</Link>
             <Link to="/plans" className="hover:text-gray-600">Plans</Link>
             <Link to="/contact" className="hover:text-gray-600">Contact</Link>
+            <Link to="/biodatas" className="hover:text-gray-600">Biodatas</Link>
 
             {/* Conditionally render Dashboard link on mobile */}
             {isLoggedIn && (
