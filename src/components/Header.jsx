@@ -64,11 +64,11 @@ const Header = () => {
             </NavLink>
           )}
           <Link to="/about" className="hover:text-gray-600">About</Link>
-          <Link to="/matches" className="hover:text-gray-600">Matches</Link>
+          {/* <Link to="/matches" className="hover:text-gray-600">Matches</Link> */}
           <Link to="/search" className="hover:text-gray-600">Search</Link>
           <Link to="/plans" className="hover:text-gray-600">Plans</Link>
           <Link to="/contact" className="hover:text-gray-600">Contact</Link>
-
+          <Link to="/biodata" className="hover:text-gray-600">Biodatas</Link>
           {/* Conditionally render Dashboard link if logged in */}
           {isLoggedIn && (
             <NavLink
@@ -126,7 +126,7 @@ const Header = () => {
           <nav className="flex flex-col items-center space-y-4 py-6 font-medium text-gray-900">
             <Link to="/" className="hover:text-gray-600">Home</Link>
             <Link to="/about" className="hover:text-gray-600">About</Link>
-            <Link to="/matches" className="hover:text-gray-600">Matches</Link>
+            {/* <Link to="/matches" className="hover:text-gray-600">Matches</Link> */}
             <Link to="/search" className="hover:text-gray-600">Search</Link>
             <Link to="/plans" className="hover:text-gray-600">Plans</Link>
             <Link to="/contact" className="hover:text-gray-600">Contact</Link>
