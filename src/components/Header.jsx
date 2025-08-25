@@ -64,7 +64,7 @@ const Header = () => {
             </NavLink>
           )}
           <Link to="/about" className="hover:text-gray-600">About</Link>
-          {/* <Link to="/matches" className="hover:text-gray-600">Matches</Link> */}
+          <Link to="/matches" className="hover:text-gray-600">Matches</Link>
           <Link to="/search" className="hover:text-gray-600">Search</Link>
           <Link to="/plans" className="hover:text-gray-600">Plans</Link>
           <Link to="/contact" className="hover:text-gray-600">Contact</Link>
