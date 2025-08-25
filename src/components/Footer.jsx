@@ -7,7 +7,11 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* 1st Column: Logo and Matrimony side-by-side */}
         <div className="flex items-center space-x-3">
-          <img src={logo} alt="Logo" className="w-14 h-14 object-contain rounded" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-14 h-14 object-contain rounded"
+          />
           <h3 className="text-2xl font-semibold">Matrimony</h3>
         </div>
 
@@ -15,9 +19,12 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-semibold mb-3">Contact</h4>
           <p className="text-sm">
-            123, Anna Salai,<br />
-            Chennai, TN 600001<br />
-            Email: support@matrimony.com<br />
+            123, Anna Salai,
+            <br />
+            Chennai, TN 600001
+            <br />
+            Email: support@matrimony.com
+            <br />
             Phone: +91-9876543210
           </p>
         </div>
@@ -27,16 +34,24 @@ const Footer = () => {
           <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="/about" className="hover:underline">About Us</a>
+              <a href="/about" className="hover:underline">
+                About Us
+              </a>
             </li>
             <li>
-              <a href="/contact" className="hover:underline">Contact</a>
+              <a href="/contact" className="hover:underline">
+                Contact
+              </a>
             </li>
             <li>
-              <a href="/privacy" className="hover:underline">Privacy Policy</a>
+              <a href="/privacy" className="hover:underline">
+                Privacy Policy
+              </a>
             </li>
             <li>
-              <a href="/terms" className="hover:underline">Terms & Conditions</a>
+              <a href="/terms" className="hover:underline">
+                Terms & Conditions
+              </a>
             </li>
           </ul>
         </div>
@@ -58,20 +73,28 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="text-center mt-4 text-gray-500 text-xs">
-        All Rights Reserved ©{' '}
-        <a
-          href="https://matrimony.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-pink-500 transition"
-        >
-          Matrimony
-        </a>{' '}
-        || Powered By: <span className="font-semibold">WP Developers</span>
+
+      {/* Footer Bottom Text */}
+      <div className="text-center mt-6 text-gray-500 text-xs leading-6 px-4">
+        <p>
+          This website is strictly for matrimonial purposes only and is not a
+          dating website
+        </p>
+        <p>
+          Website Design By{" "}
+          <a
+            href="https://interfacedigitaltech.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-pink-500 transition"
+          >
+            InterFace Technologies
+          </a>
+        </p>
       </div>
     </footer>
   );
 };
 
 export default Footer;
+

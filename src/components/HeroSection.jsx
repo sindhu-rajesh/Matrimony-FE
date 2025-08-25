@@ -52,7 +52,7 @@ const Banner = () => {
                   {slide.subtitle}
                 </p>
                 <Link
-                  to="/Search"
+                  to="/register"
                   className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition"
                 >
                   Get Started

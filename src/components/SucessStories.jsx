@@ -1,49 +1,57 @@
 import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import profile1 from "../assets/stroyimage.jpg";
 
-const successStories = [
-  {
-    id: 1,
-    coupleNames: "Raj & Priya",
-    story: "We met through MatchMate and now happily married for 2 years.",
-    photo: "https://randomuser.me/api/portraits/women/65.jpg",
-  },
-  {
-    id: 2,
-    coupleNames: "Arjun & Sneha",
-    story: "Thanks to MatchMate, we found each other and started a beautiful journey.",
-    photo: "https://randomuser.me/api/portraits/men/43.jpg",
-  },
-  {
-    id: 3,
-    coupleNames: "Kumar & Anjali",
-    story: "Our love story began on MatchMate. Grateful for this platform!",
-    photo: "https://randomuser.me/api/portraits/women/56.jpg",
-  },
+const baseImages = [
+  profile1,
+  profile1,
+  profile1,
+  profile1,
 ];
 
-const SuccessStories = () => {
+// Extra images to prepend for seamless slider effect (last 2 images)
+const images = [
+  baseImages[baseImages.length - 2],
+  baseImages[baseImages.length - 1],
+  ...baseImages,
+  baseImages[0],
+  baseImages[1],
+];
+
+function SuccessStorySlider() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,       // Show 2 images at once
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,        // Enable auto sliding
+    autoplaySpeed: 3000,   // Slide every 3 seconds
+  };
+
   return (
-    <section className="py-16 bg-gray-50 text-center max-w-6xl mx-auto px-6">
-      <h2 className="text-3xl font-bold mb-10">Success Stories</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {successStories.map(({ id, coupleNames, story, photo }) => (
-          <div
-            key={id}
-            className="bg-white rounded-lg shadow p-6 flex flex-col items-center"
-          >
+    <div className="max-w-6xl mx-auto p-4">
+      <h2 className="text-3xl font-bold text-center mb-6 text-block-700">
+        Success Story
+      </h2>
+      <Slider {...settings}>
+        {images.map((src, index) => (
+          <div key={index} className="px-2">
             <img
-              src={photo}
-              alt={`${coupleNames}`}
-              className="w-28 h-28 rounded-full mb-4 object-cover"
-              loading="lazy"
+              src={src}
+              alt={`Slide ${index + 1}`}
+              style={{ width: "680px", height: "220px", objectFit: "cover" }}
+              className="rounded-md shadow-lg"
             />
-            <p className="italic text-pink-600 mb-2">&ldquo;{story}&rdquo;</p>
-            <h3 className="font-semibold">{coupleNames}</h3>
           </div>
         ))}
-      </div>
-    </section>
+      </Slider>
+    </div>
   );
-};
+}
 
-export default SuccessStories;
+export default SuccessStorySlider;
+
