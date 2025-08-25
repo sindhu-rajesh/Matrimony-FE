@@ -65,10 +65,11 @@ const Header = () => {
           )}
           <Link to="/about" className="hover:text-gray-600">About</Link>
           {/* <Link to="/matches" className="hover:text-gray-600">Matches</Link> */}
+          Link to="/biodata" className="hover:text-gray-600">Biodatas</Link>
           <Link to="/search" className="hover:text-gray-600">Search</Link>
           <Link to="/plans" className="hover:text-gray-600">Plans</Link>
           <Link to="/contact" className="hover:text-gray-600">Contact</Link>
-          <Link to="/biodata" className="hover:text-gray-600">Biodatas</Link>
+          <
           {/* Conditionally render Dashboard link if logged in */}
           {isLoggedIn && (
             <NavLink
