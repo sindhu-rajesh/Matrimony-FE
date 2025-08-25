@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router";
-import { useEffect, useRef, useState } from "react";
 import useRole from "../hooks/UseRole";
 import useAuth from "../hooks/useAuth";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const DashboardLayout = () => {
   const [role, isLoading] = useRole();
@@ -12,6 +11,7 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false); // for home submenu
   const drawerRef = useRef(null);
 
   useEffect(() => {
@@ -60,9 +60,51 @@ const DashboardLayout = () => {
       >
         <h2 className="text-2xl font-bold mb-6 hidden md:block">Dashboard</h2>
         <nav className="space-y-2">
-          <NavLink to="/dashboard/home" className={linkClass}>
-            Home
-          </NavLink>
+          {/* Home with Submenu */}
+          <div>
+            <button
+              onClick={() => setIsHomeMenuOpen((prev) => !prev)}
+              className="flex items-center justify-between w-full text-left hover:text-purple-200"
+            >
+              <span>Home</span>
+              {isHomeMenuOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+
+            {isHomeMenuOpen && (
+              <div className="ml-4 mt-2 space-y-2 text-sm">
+                <NavLink
+                  to="/dashboard/home/hero-section"
+                  className={linkClass}
+                >
+                  Hero Section
+                </NavLink>
+                <NavLink
+                  to="/dashboard/home/success-story"
+                  className={linkClass}
+                >
+                  Success Story
+                </NavLink>
+                <NavLink
+                  to="/dashboard/home/new-registration"
+                  className={linkClass}
+                >
+                  New Registration Profile
+                </NavLink>
+                <NavLink
+                  to="/dashboard/home/membership-plan"
+                  className={linkClass}
+                >
+                  Membership Plan
+                </NavLink>
+                <NavLink
+                  to="/dashboard/home/payment-details"
+                  className={linkClass}
+                >
+                  Payment Details
+                </NavLink>
+              </div>
+            )}
+          </div>
 
           {/* User routes */}
           {role === "user" && (
@@ -121,9 +163,7 @@ const DashboardLayout = () => {
               >
                 Approved Contact Request
               </NavLink>
-              <NavLink to="/dashboard/success-story" className={linkClass}>
-                All Success Story
-              </NavLink>
+              
             </>
           )}
 
