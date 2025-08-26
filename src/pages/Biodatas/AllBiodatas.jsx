@@ -51,81 +51,7 @@ const AllBiodatas = () => {
         animate={{ opacity: 1 }}
         className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto px-4 py-8"
       >
-        {/* Sticky Filter Sidebar */}
-        <div className="md:col-span-1">
-          <motion.div
-            initial={{ x: -30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="bg-gray-100 p-6 rounded-md space-y-6 sticky top-24"
-          >
-            <h2 className="text-xl font-bold text-block-700">Filter Biodatas</h2>
-
-            {/* Biodata Type */}
-            <div>
-              <label className="block font-medium mb-1">Biodata Type</label>
-              <select
-                name="biodataType"
-                value={filters.biodataType}
-                onChange={handleFilterChange}
-                className="w-full border border-gray-300 rounded px-3 py-2 bg-white"
-              >
-                <option value="">All</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-
-            {/* Division */}
-            <div>
-              <label className="block font-medium mb-1">Division</label>
-              <select
-                name="division"
-                value={filters.division}
-                onChange={handleFilterChange}
-                className="w-full border border-gray-300 rounded px-3 py-2 bg-white"
-              >
-                <option value="">All</option>
-                {[
-                  "Dhaka",
-                  "Chattagram",
-                  "Rangpur",
-                  "Barisal",
-                  "Khulna",
-                  "Mymensingh",
-                  "Sylhet",
-                ].map((division) => (
-                  <option key={division} value={division}>
-                    {division}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Age Range */}
-            <div>
-              <label className="block font-medium mb-1">Age Range</label>
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  name="minAge"
-                  value={filters.minAge}
-                  onChange={handleFilterChange}
-                  placeholder="Min"
-                  className="w-full border border-gray-300 rounded px-2 py-2 bg-white"
-                />
-                <input
-                  type="number"
-                  name="maxAge"
-                  value={filters.maxAge}
-                  onChange={handleFilterChange}
-                  placeholder="Max"
-                  className="w-full border border-gray-300 rounded px-2 py-2 bg-white"
-                />
-              </div>
-            </div>
-          </motion.div>
-        </div>
+       
 
         {/* Biodata Display Section */}
         <div className="md:col-span-3">
@@ -252,3 +178,78 @@ const AllBiodatas = () => {
 };
 
 export default AllBiodatas;
+// Sticky Filter Sidebar
+// <div className="md:col-span-1">
+//   <motion.div
+//     initial={{ x: -30, opacity: 0 }}
+//     animate={{ x: 0, opacity: 1 }}
+//     transition={{ delay: 0.1 }}
+//     className="bg-gray-100 p-6 rounded-md space-y-6 sticky top-24"
+//   >
+//     <h2 className="text-xl font-bold text-block-700">Filter Biodatas</h2>
+
+//     {/* Biodata Type */}
+//     <div>
+//       <label className="block font-medium mb-1">Biodata Type</label>
+//       <select
+//         name="biodataType"
+//         value={filters.biodataType}
+//         onChange={handleFilterChange}
+//         className="w-full border border-gray-300 rounded px-3 py-2 bg-white"
+//       >
+//         <option value="">All</option>
+//         <option value="Male">Male</option>
+//         <option value="Female">Female</option>
+//       </select>
+//     </div>
+
+//     {/* Division */}
+//     <div>
+//       <label className="block font-medium mb-1">Division</label>
+//       <select
+//         name="division"
+//         value={filters.division}
+//         onChange={handleFilterChange}
+//         className="w-full border border-gray-300 rounded px-3 py-2 bg-white"
+//       >
+//         <option value="">All</option>
+//         {[
+//           "Dhaka",
+//           "Chattagram",
+//           "Rangpur",
+//           "Barisal",
+//           "Khulna",
+//           "Mymensingh",
+//           "Sylhet",
+//         ].map((division) => (
+//           <option key={division} value={division}>
+//             {division}
+//           </option>
+//         ))}
+//       </select>
+//     </div>
+
+//     {/* Age Range */}
+//     <div>
+//       <label className="block font-medium mb-1">Age Range</label>
+//       <div className="flex gap-2">
+//         <input
+//           type="number"
+//           name="minAge"
+//           value={filters.minAge}
+//           onChange={handleFilterChange}
+//           placeholder="Min"
+//           className="w-full border border-gray-300 rounded px-2 py-2 bg-white"
+//         />
+//         <input
+//           type="number"
+//           name="maxAge"
+//           value={filters.maxAge}
+//           onChange={handleFilterChange}
+//           placeholder="Max"
+//           className="w-full border border-gray-300 rounded px-2 py-2 bg-white"
+//         />
+//       </div>
+//     </div>
+//   </motion.div>
+// </div>

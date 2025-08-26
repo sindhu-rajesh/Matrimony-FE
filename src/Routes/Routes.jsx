@@ -11,7 +11,7 @@ import AdminRoute from "./AdminRoute";
 
 import EditBiodata from "../pages/Dashboard/User/EditBiodata";
 import ViewBiodata from "../pages/Dashboard/User/ViewBiodata";
-import FavoritesBiodata from "../pages/Dashboard/User/FavoritesBiodata";
+// import Favorites from "../pages/Dashboard/User/Favorites";
 import MyContactRequest from "../pages/Dashboard/User/MyContactRequest";
 import GotMarried from "../pages/Dashboard/User/GotMarried";
 
@@ -20,22 +20,25 @@ import ApprovedPremium from "../pages/Dashboard/Admin/ApprovedPremium";
 import ApproveContactRequest from "../pages/Dashboard/Admin/ApproveContactRequest";
 import AdminSuccessStory from "../pages/Dashboard/Admin/AdminSuccessStory";
 import AdminHeroSection from "../pages/Dashboard/Admin/AdminHeroSection";
-import NewProfiles from "../pages/Dashboard/Admin/AdminNewRegister";
+// import NewProfiles from "../pages/Dashboard/Admin/AdminNewRegister";
 import NewRegistration from "../pages/Dashboard/Admin/AdminNewRegister";
-import AdminMembershipPlan from "../pages/Dashboard/Admin/AdminMembershipPlan";
-import AdminPaymentPanel from "../pages/Dashboard/Admin/AdminPaymentsDetails";
+import MembershipPlan from "../pages/Dashboard/Admin/AdminMembershipPlan";
+import PaymentDetails from "../pages/Dashboard/Admin/AdminPaymentsDetails";
+import AboutUsAdmin from "../pages/Dashboard/Admin/AdminAbout";
+import ContactAdmin from "../pages/Dashboard/Admin/AdminContact";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
 
 import AboutUs from "../pages/AboutUs";
-import MatchesPage from "../pages/Matchpage";
+import Matches from "../pages/Matchpage";
 import Search from "../pages/Search";
-import Plans from "../components/Plan";
-import ContactPage from "../pages/ContactPage";
+import Plans from "../pages/PaymentsPlans";
+import Contact from "../pages/ContactPage";
+
 import AllBiodatas from "../pages/Biodatas/AllBiodatas";
 import BiodataDetails from "../pages/Biodatas/BiodataDetails";
 import PaymentPlans from "../pages/PaymentsPlans";
-import ProfilePage from "../pages/ProfilePage";
+import Profile from "../pages/ProfilePage";
 
 export const AppRoutes = createBrowserRouter([
   {
@@ -46,10 +49,10 @@ export const AppRoutes = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "about", element: <AboutUs /> },
-      { path: "matches", element: <MatchesPage /> },
+      { path: "matches", element: <Matches /> },
       { path: "search", element: <Search /> },
       { path: "plans", element: <Plans /> },
-      { path: "contact", element: <ContactPage /> },
+      { path: "contact", element: <Contact /> },
       { path: "biodatas", element: <AllBiodatas /> },
       {
         path: "biodata-details/:id",
@@ -59,7 +62,7 @@ export const AppRoutes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: "profile/:id", element: <ProfilePage /> },
+      { path: "profile/:id", element: <Profile /> },
       { path: "payment", element: <PaymentPlans /> },
     ],
   },
@@ -71,9 +74,10 @@ export const AppRoutes = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // Dashboard home with nested sub-routes
       {
         path: "home",
-        element: <Dashboard />, // Dashboard must include <Outlet />!
+        element: <Dashboard />, // must contain <Outlet />
         children: [
           {
             path: "hero-section",
@@ -92,14 +96,6 @@ export const AppRoutes = createBrowserRouter([
             ),
           },
           {
-            path: "new-profiles",
-            element: (
-              <AdminRoute>
-                <NewProfiles />
-              </AdminRoute>
-            ),
-          },
-          {
             path: "new-registration",
             element: (
               <AdminRoute>
@@ -108,10 +104,10 @@ export const AppRoutes = createBrowserRouter([
             ),
           },
           {
-            path: "membership-plan", 
+            path: "membership-plan",
             element: (
               <AdminRoute>
-                <AdminMembershipPlan />
+                <MembershipPlan />
               </AdminRoute>
             ),
           },
@@ -119,11 +115,28 @@ export const AppRoutes = createBrowserRouter([
             path: "payment-details",
             element: (
               <AdminRoute>
-                <AdminPaymentPanel />
+                <PaymentDetails />
               </AdminRoute>
             ),
           },
         ],
+      },
+      // Admin pages directly under dashboard
+      {
+        path: "about-us",
+        element: (
+          <AdminRoute>
+            <AboutUsAdmin />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "contact-us",
+        element: (
+          <AdminRoute>
+            <ContactAdmin />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-users",
@@ -151,9 +164,12 @@ export const AppRoutes = createBrowserRouter([
       },
       { path: "edit-biodata", element: <EditBiodata /> },
       { path: "view-biodata", element: <ViewBiodata /> },
-      { path: "my-contact-requests", element: <MyContactRequest /> },
-      { path: "favourites", element: <FavoritesBiodata /> },
+      { path: "my-contact-request", element: <MyContactRequest /> },
+      // { path: "favourites", element: <Favorites /> },
       { path: "got-married", element: <GotMarried /> },
     ],
   },
 ]);
+
+
+
