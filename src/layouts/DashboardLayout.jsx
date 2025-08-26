@@ -106,6 +106,14 @@ const DashboardLayout = () => {
             )}
           </div>
 
+          {/* Added About Us and Contact Us links below Home */}
+          <NavLink to="/dashboard/aboutus" className={linkClass}>
+            About Us
+          </NavLink>
+          <NavLink to="/dashboard/contactus" className={linkClass}>
+            Contact Us
+          </NavLink>
+
           {/* User routes */}
           {role === "user" && (
             <>
@@ -163,7 +171,6 @@ const DashboardLayout = () => {
               >
                 Approved Contact Request
               </NavLink>
-              
             </>
           )}
 

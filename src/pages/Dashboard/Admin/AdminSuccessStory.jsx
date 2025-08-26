@@ -1,125 +1,168 @@
-import React from "react";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Dialog } from "@headlessui/react";
-import LoadingSpinner from "../../../components/LoadingSpinner";
-import { FaHeartBroken } from "react-icons/fa";
 
-const AdminSuccessStory = () => {
-  const axiosSecure = useAxiosSecure();
-  const [selectedStory, setSelectedStory] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+import React, { useState } from "react";
 
-  // Fetch success stories
-  const { data: successStories = [], isLoading } = useQuery({
-    queryKey: ["admin-success-stories"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/success-story");
-      return res.data;
-    },
-  });
+const initialSuccessStories = [
+  {
+    id: 1,
+    imageUrl: "https://via.placeholder.com/680x220?text=Story+1",
+  },
+  {
+    id: 2,
+    imageUrl: "https://via.placeholder.com/680x220?text=Story+2",
+  },
+];
 
-  const openModal = (story) => {
-    setSelectedStory(story);
-    setIsOpen(true);
+const AdminSuccessStoryPanel = () => {
+  const [stories, setStories] = useState(initialSuccessStories);
+  const [showModal, setShowModal] = useState(false);
+  const [editingStory, setEditingStory] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+
+  const openAddModal = () => {
+    setEditingStory(null);
+    setImageFile(null);
+    setImagePreview("");
+    setShowModal(true);
+  };
+
+  const openEditModal = (story) => {
+    setEditingStory(story);
+    setImagePreview(story.imageUrl);
+    setImageFile(null);
+    setShowModal(true);
   };
 
   const closeModal = () => {
-    setSelectedStory(null);
-    setIsOpen(false);
+    setShowModal(false);
+    setImageFile(null);
+    setImagePreview("");
   };
 
-  if (isLoading) return <LoadingSpinner />;
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const preview = URL.createObjectURL(file);
+    setImageFile(file);
+    setImagePreview(preview);
+  };
 
-  if (successStories.length === 0) {
-    return (
-      <div className="text-center flex flex-col items-center justify-center gap-3 mt-10 text-gray-600">
-        <FaHeartBroken className="text-6xl text-rose-400" />
-        <p className="text-xl font-semibold">No success stories found</p>
-        <p className="text-sm text-gray-500">
-          Looks like no one has submitted their happy story yet.
-        </p>
-      </div>
-    );
-  }
+  const handleSave = () => {
+    if (!imageFile && !imagePreview) {
+      alert("Please select an image");
+      return;
+    }
+
+    if (editingStory) {
+      // Update existing story
+      const updated = stories.map((story) =>
+        story.id === editingStory.id
+          ? { ...story, imageUrl: imagePreview }
+          : story
+      );
+      setStories(updated);
+    } else {
+      // Add new story
+      const newStory = {
+        id: Date.now(),
+        imageUrl: imagePreview,
+      };
+      setStories([...stories, newStory]);
+    }
+    closeModal();
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this story?")) {
+      setStories(stories.filter((story) => story.id !== id));
+    }
+  };
 
   return (
-    <div>
-      <title>Dashboard || Success Story</title>
-      <div className="p-6 bg-white shadow rounded-md mt-6">
-        <h2 className="text-2xl font-bold mb-4 text-rose-700 text-center">
-          All Success Stories
-        </h2>
+    <div className="max-w-5xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Manage Success Stories</h1>
 
-        <div>
-          <table className="min-w-full table-auto border border-gray-300">
-            <thead className="bg-rose-100 text-red-700 ">
-              <tr>
-                <th className="py-2 px-4 border">Male Biodata ID</th>
-                <th className="py-2 px-4 border">Female Biodata ID</th>
-                <th className="py-2 px-4 border">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {successStories.map((story, idx) => (
-                <tr key={idx} className="text-center">
-                  <td className="py-2 px-4 border">{story.selfBiodataId}</td>
-                  <td className="py-2 px-4 border">{story.partnerBiodataId}</td>
-                  <td className="py-2 px-4 border">
-                    <button
-                      onClick={() => openModal(story)}
-                      className="bg-rose-700 hover:bg-purple-500 text-white px-4 py-1 text-sm rounded"
-                    >
-                      View Story
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Modal */}
-        <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
-          {/* Modal Overlay */}
-          <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-          <div className="fixed inset-0 flex items-center justify-center p-4">
-            <Dialog.Panel className="bg-white max-w-md w-full p-6 rounded-lg shadow-lg">
-              <Dialog.Title className="text-lg font-bold mb-2 text-rose-700">
-                Success Story
-              </Dialog.Title>
-
-              {selectedStory && (
-                <>
-                  <img
-                    src={
-                      selectedStory.image ||
-                      "https://via.placeholder.com/400x250?text=No+Image"
-                    }
-                    alt="Couple"
-                    className="w-full h-64 object-cover rounded-md mb-4"
-                  />
-                  <p className="text-gray-700 whitespace-pre-line">
-                    {selectedStory.review}
-                  </p>
-                </>
-              )}
-
-              <div className="text-right mt-4">
-                <button
-                  onClick={closeModal}
-                  className="bg-gray-300 hover:bg-gray-400 text-sm px-4 py-1 rounded"
-                >
-                  Close
-                </button>
-              </div>
-            </Dialog.Panel>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {stories.map((story) => (
+          <div
+            key={story.id}
+            className="border rounded shadow-md overflow-hidden relative"
+          >
+            <img
+              src={story.imageUrl}
+              alt="Success Story"
+              className="w-full h-40 object-cover"
+            />
+            <div className="p-3 flex justify-between items-center bg-gray-100">
+              <button
+                onClick={() => openEditModal(story)}
+                className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(story.id)}
+                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
+              >
+                Delete
+              </button>
+            </div>
           </div>
-        </Dialog>
+        ))}
       </div>
+
+      <button
+        onClick={openAddModal}
+        className="mt-8 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
+      >
+        Add New Story
+      </button>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+          <div className="bg-white rounded-lg w-full max-w-md p-6 shadow-lg relative">
+            <h2 className="text-xl font-semibold mb-4">
+              {editingStory ? "Edit Success Story" : "Add New Success Story"}
+            </h2>
+
+            <div className="mb-4">
+              <label className="block mb-2 font-medium">Upload Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full border border-gray-300 rounded px-2 py-1"
+              />
+            </div>
+
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="w-full h-40 object-cover rounded mb-4"
+              />
+            )}
+
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 rounded border border-gray-400 hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default AdminSuccessStory;
+export default AdminSuccessStoryPanel;
