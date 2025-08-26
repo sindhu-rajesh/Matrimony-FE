@@ -20,6 +20,10 @@ import ApprovedPremium from "../pages/Dashboard/Admin/ApprovedPremium";
 import ApproveContactRequest from "../pages/Dashboard/Admin/ApproveContactRequest";
 import AdminSuccessStory from "../pages/Dashboard/Admin/AdminSuccessStory";
 import AdminHeroSection from "../pages/Dashboard/Admin/AdminHeroSection";
+import NewProfiles from "../pages/Dashboard/Admin/AdminNewRegister";
+import NewRegistration from "../pages/Dashboard/Admin/AdminNewRegister";
+import AdminMembershipPlan from "../pages/Dashboard/Admin/AdminMembershipPlan";
+import AdminPaymentPanel from "../pages/Dashboard/Admin/AdminPaymentsDetails";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
 
@@ -69,7 +73,7 @@ export const AppRoutes = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <Dashboard />,  // Dashboard component must include <Outlet />
+        element: <Dashboard />, // Dashboard must include <Outlet />!
         children: [
           {
             path: "hero-section",
@@ -84,6 +88,38 @@ export const AppRoutes = createBrowserRouter([
             element: (
               <AdminRoute>
                 <AdminSuccessStory />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "new-profiles",
+            element: (
+              <AdminRoute>
+                <NewProfiles />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "new-registration",
+            element: (
+              <AdminRoute>
+                <NewRegistration />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "membership-plan", 
+            element: (
+              <AdminRoute>
+                <AdminMembershipPlan />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "payment-details",
+            element: (
+              <AdminRoute>
+                <AdminPaymentPanel />
               </AdminRoute>
             ),
           },
