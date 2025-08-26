@@ -54,69 +54,21 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <aside
         ref={drawerRef}
-        className={`fixed top-0 left-0 w-64 z-50 bg-[#C2185B]/90 text-white py-15 px-6 mx-auto space-y-4 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${
-          isDrawerOpen ? "translate-x-0" : "-translate-x-full"
-        } md:block`}
+        className={`fixed top-0 left-0 w-64 z-50 bg-[#C2185B]/90 text-white py-15 px-6 mx-auto space-y-4 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"
+          } md:block`}
       >
         <h2 className="text-2xl font-bold mb-6 hidden md:block">Dashboard</h2>
         <nav className="space-y-2">
-          {/* Home with Submenu */}
-          <div>
-            <button
-              onClick={() => setIsHomeMenuOpen((prev) => !prev)}
-              className="flex items-center justify-between w-full text-left hover:text-purple-200"
-            >
-              <span>Home</span>
-              {isHomeMenuOpen ? <FaChevronUp /> : <FaChevronDown />}
-            </button>
 
-            {isHomeMenuOpen && (
-              <div className="ml-4 mt-2 space-y-2 text-sm">
-                <NavLink
-                  to="/dashboard/home/hero-section"
-                  className={linkClass}
-                >
-                  Hero Section
-                </NavLink>
-                <NavLink
-                  to="/dashboard/home/success-story"
-                  className={linkClass}
-                >
-                  Success Story
-                </NavLink>
-                <NavLink
-                  to="/dashboard/home/new-registration"
-                  className={linkClass}
-                >
-                  New Registration Profile
-                </NavLink>
-                <NavLink
-                  to="/dashboard/home/membership-plan"
-                  className={linkClass}
-                >
-                  Membership Plan
-                </NavLink>
-                <NavLink
-                  to="/dashboard/home/payment-details"
-                  className={linkClass}
-                >
-                  Payment Details
-                </NavLink>
-              </div>
-            )}
-          </div>
 
-          {/* Added About Us and Contact Us links below Home */}
-          <NavLink to="/dashboard/aboutus" className={linkClass}>
-            About Us
-          </NavLink>
-          <NavLink to="/dashboard/contactus" className={linkClass}>
-            Contact Us
-          </NavLink>
+
 
           {/* User routes */}
           {role === "user" && (
             <>
+              <NavLink to="/dashboard/home" className={linkClass}>
+                Home
+              </NavLink>
               <NavLink to="/dashboard/edit-biodata" className={linkClass}>
                 Edit Biodata
               </NavLink>
@@ -141,6 +93,9 @@ const DashboardLayout = () => {
           {/* Premium routes */}
           {role === "premium" && (
             <>
+              <NavLink to="/dashboard/home" className={linkClass}>
+                Home
+              </NavLink>
               <NavLink to="/dashboard/edit-biodata" className={linkClass}>
                 Edit Biodata
               </NavLink>
@@ -159,6 +114,51 @@ const DashboardLayout = () => {
           {/* Admin routes */}
           {role === "admin" && (
             <>
+              {/* Home with Submenu */}
+              <div>
+                <button
+                  onClick={() => setIsHomeMenuOpen((prev) => !prev)}
+                  className="flex items-center justify-between w-full text-left hover:text-purple-200"
+                >
+                  <span>Home</span>
+                  {isHomeMenuOpen ? <FaChevronUp /> : <FaChevronDown />}
+                </button>
+
+                {isHomeMenuOpen && (
+                  <div className="ml-4 mt-2 space-y-2 text-sm">
+                    <NavLink
+                      to="/dashboard/home/hero-section"
+                      className={linkClass}
+                    >
+                      Hero Section
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/home/success-story"
+                      className={linkClass}
+                    >
+                      Success Story
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/home/new-registration"
+                      className={linkClass}
+                    >
+                      New Registration Profile
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/home/membership-plan"
+                      className={linkClass}
+                    >
+                      Membership Plan
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/home/payment-details"
+                      className={linkClass}
+                    >
+                      Payment Details
+                    </NavLink>
+                  </div>
+                )}
+              </div>
               <NavLink to="/dashboard/manage-users" className={linkClass}>
                 Manage Users
               </NavLink>
@@ -170,6 +170,13 @@ const DashboardLayout = () => {
                 className={linkClass}
               >
                 Approved Contact Request
+              </NavLink>
+              {/* Added About Us and Contact Us links below Home */}
+              <NavLink to="/dashboard/aboutus" className={linkClass}>
+                About Us
+              </NavLink>
+              <NavLink to="/dashboard/contactus" className={linkClass}>
+                Contact Us
               </NavLink>
             </>
           )}

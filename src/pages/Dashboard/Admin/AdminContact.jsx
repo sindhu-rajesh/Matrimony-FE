@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 
-function AdminContactPanel({ initialData }) {
-  const [contactInfo, setContactInfo] = useState(initialData);
-  const [imagePreview, setImagePreview] = useState(initialData.image);
+function AdminContactPanel({ initialData = {} }) {
+  // Provide fallback values if initialData is missing
+  const [contactInfo, setContactInfo] = useState({
+    phone: initialData.phone || "",
+    email: initialData.email || "",
+    address: initialData.address || "",
+    image: initialData.image || "",
+  });
+
+  const [imagePreview, setImagePreview] = useState(initialData.image || "");
   const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
@@ -19,11 +26,12 @@ function AdminContactPanel({ initialData }) {
   const handleSave = () => {
     // Upload imageFile if changed to server or cloud storage
     // Save updated contactInfo and image path/url to backend
+    console.log("Saving data:", contactInfo, imageFile);
   };
 
   const handleCancel = () => {
     setContactInfo(initialData);
-    setImagePreview(initialData.image);
+    setImagePreview(initialData.image || "");
     setImageFile(null);
   };
 

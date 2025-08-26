@@ -123,7 +123,7 @@ export const AppRoutes = createBrowserRouter([
       },
       // Admin pages directly under dashboard
       {
-        path: "about-us",
+        path: "aboutus",
         element: (
           <AdminRoute>
             <AboutUsAdmin />
@@ -131,7 +131,7 @@ export const AppRoutes = createBrowserRouter([
         ),
       },
       {
-        path: "contact-us",
+        path: "contactus",
         element: (
           <AdminRoute>
             <ContactAdmin />
